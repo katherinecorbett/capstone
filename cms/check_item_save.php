@@ -27,6 +27,8 @@
   
 	$TableName = "items";
 	$sql = "SELECT * FROM $TableName WHERE title='$title' AND item_id!='$item_id'";
+	$sql = mysqli_real_escape_string($sql);
+
 	$DuplicateCheck = mysqli_query($conn, $sql) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 	if ( mysqli_num_rows($DuplicateCheck) > 0 ) {  $errors=7; $is_duplicate="yes"; }	  
@@ -34,6 +36,8 @@
 	if ($errors>0) {
 
 		$QueryString = "SELECT * FROM $TableName WHERE item_id='$item_id'";
+		$QueryString = mysqli_real_escape_string($QueryString);
+		
 		$QueryResult = mysqli_query($conn, $QueryString) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 		while ($row = mysqli_fetch_assoc($QueryResult)) {
@@ -104,6 +108,8 @@
   	} else {
 
 		$SQLString = "UPDATE items SET category = '$catdropdown', title = '$title', description = '$description', price = '$price', quantity = '$quantity', sku = '$sku' WHERE item_id = '$item_id'";
+		$SQLString = mysqli_real_escape_string($SQLString);
+			
 		$QueryResult = mysqli_query($conn, $SQLString) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 
