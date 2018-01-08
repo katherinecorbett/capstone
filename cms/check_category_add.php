@@ -15,6 +15,8 @@
   
 	$TableName = "categories";
 	$sql = "SELECT * FROM $TableName WHERE category='$category'";
+	$sql = mysqli_real_escape_string($sql);
+
 	$DuplicateCheck = mysqli_query($conn, $sql) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 	if ( mysqli_num_rows($DuplicateCheck) > 0 ) {  $errors=2; $is_duplicate="yes"; }	  
@@ -49,6 +51,7 @@
   	} else {
 
 		$SQLString = "INSERT INTO $TableName(category)values('$category')";
+		$SQLString = mysqli_real_escape_string($SQLString);
 		$QueryResult = mysqli_query($conn, $SQLString) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 
