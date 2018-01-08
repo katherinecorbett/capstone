@@ -17,6 +17,7 @@
   
 	$TableName = "categories";
 	$sql = "SELECT * FROM $TableName WHERE category='$category' AND category_id!='$category_id'";
+	$sql = mysqli_real_escape_string($sql);
 	$DuplicateCheck = mysqli_query($conn, $sql) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 	if ( mysqli_num_rows($DuplicateCheck) > 0 ) {  $errors=3; $is_duplicate="yes"; }	  
@@ -52,6 +53,8 @@
   	} else {
 
 		$SQLString = "UPDATE $TableName SET category='$category' WHERE category_id='$category_id'";
+		$SQLString = mysqli_real_escape_string($SQLString);
+		
 		$QueryResult = mysqli_query($conn, $SQLString) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 
