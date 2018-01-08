@@ -22,6 +22,8 @@
 
  	$TableName = "categories";
 	$QueryString = "SELECT * FROM $TableName WHERE category_id='$category_id'";
+	$QueryString = mysqli_real_escape_string($QueryString);
+	
 	$QueryResult = mysqli_query($conn, $QueryString) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 	while ($Row = mysqli_fetch_assoc($QueryResult)) {
