@@ -42,6 +42,7 @@
 <?php
 
 	$sql = "select category_id, category from categories";
+	$sql = strip_slashes($sql);
 	$result = mysqli_query($conn, $sql) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 	while ($row = mysqli_fetch_assoc($result)) {
