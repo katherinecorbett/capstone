@@ -27,7 +27,7 @@
   
 	$TableName = "items";
 	$sql = "SELECT * FROM $TableName WHERE title='$title' AND item_id!='$item_id'";
-	$sql = mysqli_real_escape_string($sql);
+	$sql = strip_slashes($sql);
 
 	$DuplicateCheck = mysqli_query($conn, $sql) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
@@ -36,7 +36,7 @@
 	if ($errors>0) {
 
 		$QueryString = "SELECT * FROM $TableName WHERE item_id='$item_id'";
-		$QueryString = mysqli_real_escape_string($QueryString);
+		$QueryString = strip_slashes($QueryString);
 		
 		$QueryResult = mysqli_query($conn, $QueryString) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
@@ -64,6 +64,7 @@
 <?php
    
 		$sql = "SELECT category_id, category FROM categories";
+		$sql = strip_slashes($sql);
 		$result = mysqli_query($conn, $sql) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 		while ($row = mysqli_fetch_assoc($result)) {
