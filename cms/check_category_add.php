@@ -15,7 +15,7 @@
   
 	$TableName = "categories";
 	$sql = "SELECT * FROM $TableName WHERE category='$category'";
-	$sql = mysqli_real_escape_string($sql);
+	$sql = strip_slashes($sql);
 
 	$DuplicateCheck = mysqli_query($conn, $sql) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
