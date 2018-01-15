@@ -26,7 +26,7 @@
   
 	$TableName = "items";
 	$sql = "SELECT * FROM $TableName WHERE title='$title'";
-	$sql = mysqli_real_escape_string($sql);
+	$sql = strip_slashes($sql);
 	$DuplicateCheck = mysqli_query($conn, $sql) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 	if ( mysqli_num_rows($DuplicateCheck) > 0 ) {  $errors=7; $is_duplicate="yes"; }	  
@@ -53,8 +53,7 @@
 <?php
    
 	$sql = "SELECT category_id, category FROM categories";
-	//I realize that this is probably unecessary
-	$sql = mysqli_real_escape_string($sql);
+	$sql = strip_slashes($sql);
 	$result = mysqli_query($conn, $sql) or trigger_error( 
 						mysqli_error(), E_USER_ERROR);
 	while ($row = mysqli_fetch_assoc($result)) {
